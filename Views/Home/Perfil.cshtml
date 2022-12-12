@@ -1,0 +1,149 @@
+﻿@*
+*@
+@{  
+    var data = ViewBag.Usuario;  
+    
+}
+<style>
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    background-color: lightslategray;
+}
+
+.card {
+    width: 350px;
+    background-color: #efefef;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.image img {
+    transition: all 0.5s
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+.btnPerfil {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%
+}
+
+.name {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.idd {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.idd1 {
+    font-size: 12px
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.follow {
+    font-size: 12px;
+    font-weight: 500;
+    color: #444444
+}
+
+.btn1 {
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: #000;
+    color: #aeaeae;
+    font-size: 15px
+}
+
+.text span {
+    font-size: 13px;
+    color: #545454;
+    font-weight: 500
+}
+
+.icons i {
+    font-size: 19px
+}
+
+hr .new1 {
+    border: 1px solid
+}
+
+.join {
+    font-size: 14px;
+    color: #a0a0a0;
+    font-weight: bold
+}
+
+.date {
+colorckground-color: #ccc
+}
+</style>
+ @if(ViewBag.UsuarioLogado[0].Email != null)
+    {
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+          <strong>Parabéns, Você foi logado com sucesso!</strong> <p> Seja Bem Vindo @ViewBag.UsuarioLogado[0].Nome! </p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    }
+<div style="background-color:white">
+    <p>     </p>
+    <div class="container align-items-lg-start"> 
+    <div class="card p-4"> <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+        <button class="btnPerfil btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" /></button> 
+        <span class="name mt-3"> @ViewBag.UsuarioLogado[0].Nome </span> 
+        
+        <span class="id"></span> 
+        
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Notificações
+                    <span class="badge badge-dark badge-pill">2</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Mensagem Whatsapp
+                    <span class="badge badge-dark badge-pill">1</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Editar Perfil
+                    <span class="badge badge-dark badge-pill">1</span>
+                  </li>
+                </ul>
+
+        <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
+            <span><i class="fa fa-copy"></i></span> </div> <div class="d-flex flex-row justify-content-center align-items-center mt-3">
+                <span class="number">1069 <span class="follow">Seguidores</span></span> </div> <div class=" d-flex mt-2">
+
+                    <button class="btn1 btn-dark">Editar Perfil</button> 
+                    @{
+                        //var url = "https://api.whatsapp.com/send?phone=" + ViewBag.UsuarioLogado[0].Telefone +"&text=Texto%20aqui";
+                    }
+                    
+                    <a href=@Url.Content("https://api.whatsapp.com/send?phone="+"9999999&text=Texto%20aqui");}
+                        target="_blank">
+                        <button class="btn1 btn-dark">
+                    <svg enable-background="new 0 0 512 512" width="25" height="25" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><path d="M256.064,0h-0.128l0,0C114.784,0,0,114.816,0,256c0,56,18.048,107.904,48.736,150.048l-31.904,95.104  l98.4-31.456C155.712,496.512,204,512,256.064,512C397.216,512,512,397.152,512,256S397.216,0,256.064,0z" fill="#4CAF50"/><path d="m405.02 361.5c-6.176 17.44-30.688 31.904-50.24 36.128-13.376 2.848-30.848 5.12-89.664-19.264-75.232-31.168-123.68-107.62-127.46-112.58-3.616-4.96-30.4-40.48-30.4-77.216s18.656-54.624 26.176-62.304c6.176-6.304 16.384-9.184 26.176-9.184 3.168 0 6.016 0.16 8.576 0.288 7.52 0.32 11.296 0.768 16.256 12.64 6.176 14.88 21.216 51.616 23.008 55.392 1.824 3.776 3.648 8.896 1.088 13.856-2.4 5.12-4.512 7.392-8.288 11.744s-7.36 7.68-11.136 12.352c-3.456 4.064-7.36 8.416-3.008 15.936 4.352 7.36 19.392 31.904 41.536 51.616 28.576 25.44 51.744 33.568 60.032 37.024 6.176 2.56 13.536 1.952 18.048-2.848 5.728-6.176 12.8-16.416 20-26.496 5.12-7.232 11.584-8.128 18.368-5.568 6.912 2.4 43.488 20.48 51.008 24.224 7.52 3.776 12.48 5.568 14.304 8.736 1.792 3.168 1.792 18.048-4.384 35.52z" fill="#FAFAFA"/> Editar Perfil </svg>
+                    </button></a>
+
+                
+                            
+                        </div> </div> </div>
+</div>
+</div>
