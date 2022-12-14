@@ -29,7 +29,9 @@ namespace ArtCulture.Controllers
         public IActionResult Portfolio()
         {
            var listaPortifolio = ListaPortfolio();
-            ViewBag.Portfolio = listaPortifolio.Resultado;
+           ViewBag.Portfolio = listaPortifolio.Resultado;
+
+            
             return View();
         }
 
@@ -42,9 +44,11 @@ namespace ArtCulture.Controllers
         [HttpGet("Portfolio/EditarPortfolio")]
         public IActionResult EditarPortfolio(int Id)
         {
+            
             var portfolioAntigo = _portfolioService.SelecionarPorId(Id);
-            ViewBag.PortfolioAntigo = portfolioAntigo;
-
+            ViewBag.PortfolioAntigo = portfolioAntigo.Resultado;
+            
+           
             return View();
         }
 
@@ -73,10 +77,10 @@ namespace ArtCulture.Controllers
         [HttpPost("Portfolio/Portfolio/CadastrarPortfolio")]
         public ActionResult CadastrarPortfolio(Portfolio portfolio)
         {
-            var usuarioLogado = JsonConvert.DeserializeObject<IEnumerable<Usuario>>(HttpContext.Session.GetString("usuarioLogado"));
+            var usuarioLogado = JsonConvert.DeserializeObject<IList<Usuario>>(HttpContext.Session.GetString("usuarioLogado"));
             ViewBag.UsuarioLogado = usuarioLogado;
 
-            var resposta = _portfolioService.CadastrarPortfolio(portfolio);
+            var resposta = _portfolioService.CadastrarPortfolio(portfolio, usuarioLogado[0]);
             return Redirect("/Portfolio/Portfolio/Portfolio");
             //return View(portfolio);
         }
@@ -123,7 +127,7 @@ namespace ArtCulture.Controllers
             return Redirect("/Portfolio/Portfolio/Portfolio");
         }
 
-        [HttpGet("Portfolio/Editar")]
+        [HttpPost("Portfolio/Editar")]
         public ActionResult EditarPortfolio(Portfolio portfolio)
         {
 

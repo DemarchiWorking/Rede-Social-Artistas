@@ -5,7 +5,7 @@ namespace AniversarioReentregaPA.Repositorio
 {
     public interface IPortfolioRepository
     {
-        Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio);
+        Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio, Usuario usuarioLogado);
         Resposta<Produto> CadastrarProduto(Produto produto);
         Resposta<Servico> CadastrarServico(Servico servico);
 

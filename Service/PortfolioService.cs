@@ -14,11 +14,11 @@ namespace ArtCulture.Service
             _portfolioRepository = portfolioRepository;
         }
 
-        public Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio)
+        public Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio, Usuario usuarioLogado)
         {
             try
             {
-                return _portfolioRepository.CadastrarPortfolio(portfolio);
+                return _portfolioRepository.CadastrarPortfolio(portfolio, usuarioLogado);
             }
             catch (Exception e)
             {
@@ -49,10 +49,6 @@ namespace ArtCulture.Service
                 return null;
             }
         }
-
-
-
-
 
         public Resposta<Portfolio> ListarPortfolio()
         {
@@ -112,7 +108,6 @@ namespace ArtCulture.Service
             {
                 return null;
             }
-
         }
 
         public Resposta<int> AlterarPortfolio(Portfolio portfolio) 

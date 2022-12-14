@@ -20,12 +20,12 @@ namespace AniversarioReentregaPA.Repositorio
             _stringConexao = configuration.GetConnectionString("conexaoSQL");
             _conexao = new SqlConnection(_stringConexao);
         } 
-        public Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio)
+        public Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio, Usuario usuarioLogado)
         {
             try
             {
                 DateTime data = DateTime.Now;
-                string sql = $@"INSERT INTO PORTIFOLIO (ID_USUARIO, TITULO, DESCRICAO, FOTO, CRIACAO) VALUES(1,'{portfolio.Titulo}','{portfolio.Descricao}', '{portfolio.Foto}', CAST('{data.ToString("yyyy-MM-dd")}' as datetime))"; 
+                string sql = $@"INSERT INTO PORTIFOLIO (ID_USUARIO, TITULO, DESCRICAO, FOTO, CRIACAO) VALUES({usuarioLogado.Id},'{portfolio.Titulo}','{portfolio.Descricao}', '{portfolio.Foto}', CAST('{data.ToString("yyyy-MM-dd")}' as datetime))"; 
                 var resultado = _conexao.Execute(sql);
 
                 Resposta<Portfolio> resposta = new Resposta<Portfolio>();
@@ -110,7 +110,7 @@ namespace AniversarioReentregaPA.Repositorio
             try
             {
                 string sql = $@"                  
-                               SELECT ID, ID_USUARIO,TITULO,DESCRICAO,FOTO,CRIACAO FROM PORTIFOLIO;";
+                               SELECT ID, ID_USUARIO,TITULO,DESCRICAO,FOTO,CRIACAO FROM PORTIFOLIO ORDER BY CRIACAO;";
 
 
 

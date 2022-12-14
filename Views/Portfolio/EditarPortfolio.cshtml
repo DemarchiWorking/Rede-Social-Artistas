@@ -3,25 +3,31 @@
         var portfolio = ViewBag.PortfolioAntigo;  
 }
 
-<h2>Registrar Portfólio </h2>
+<h2>Editar Portfólio </h2>
+
+
 <br />
 <form asp-controller="Portfolio" asp-action="EditarPortfolio">
-
+  <div class="form-group">
+    <label for="name">Id:</label>
+    <input type="text" class="form-control" asp-for="Id" value="@portfolio[0].Id">
+    <span asp-validation-for="Titulo" class="text-danger"></span>
+  </div>
   <div class="form-group">
     <label for="name">Titulo:</label>
-    <input type="text" class="form-control" asp-for="Titulo" value="@portfolio.Titulo">
+    <input type="text" class="form-control" asp-for="Titulo" value="@portfolio[0].Titulo">
     <span asp-validation-for="Titulo" class="text-danger"></span>
   </div>
   <div class="form-group">
     <label for="email">Descricao:</label>
-    <input type="text" class="form-control" asp-for="Descricao">
+    <input type="text" class="form-control" asp-for="Descricao" value="@portfolio[0].Descricao">
     <span asp-validation-for="Descricao" class="text-danger"></span>
   </div>
   <div class="form-group">
     <label for="senha">Link Foto:</label>
-    <input type="text" class="form-control" asp-for="Foto">
+    <input type="text" class="form-control" asp-for="Foto" value="@portfolio[0].Foto">
     <span asp-validation-for="Foto" class="text-danger"></span>
   </div>
 
-  <button type="submit" class="btn btn-block btn-dark"> Registrar</button>
+  <button type="submit" class="btn btn-block btn-dark"> Alterar </button>
 </form>

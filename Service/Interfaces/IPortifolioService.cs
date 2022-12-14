@@ -6,7 +6,7 @@ namespace ArtCulture.Service.Interfaces
     {
         Resposta<Servico> CadastrarServico(Servico servico);
         Resposta<Produto> CadastrarProduto(Produto produto);
-        Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio);
+        Resposta<Portfolio> CadastrarPortfolio(Portfolio portfolio, Usuario usuarioLogado);
         Resposta<Portfolio> ListarPortfolio();
         Resposta<Produto> ListarProduto(Produto produto);
         Resposta<Servico> ListarServico(Servico servico);

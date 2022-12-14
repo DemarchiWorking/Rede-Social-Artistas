@@ -1,35 +1,42 @@
 ﻿@{
     var data = ViewBag.Portfolio;  
-    var usuario = ViewBag.Usuario;  
+    var usuario = ViewBag.Usuario;
 
 }
 
 
-    <div class="col-lg-2" style="text-align:right">
-                <a href="CadastrarPortfolio"><button type="button" class="btn btn-block btn-dark">
-                    Cadastrar
-                </button></a>
-    </div>
-   
+<div class="col-lg-2" style="text-align:right">
+    <a href="CadastrarPortfolio"><button type="button" class="btn btn-block btn-dark">
+            Cadastrar
+        </button></a>
+</div>
+
 
 <div class="row">
 
     @{
+
         foreach (var item in data)
         {
                   <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <div class="card" style="width: 18rem;">
-                          <center><img class="card-img-top" style="width:250px; height: 250px;" src="https://img.elo7.com.br/product/original/3337D7B/camiseta-pintada-a-mao-camiseta.jpg" alt="Imagem de capa do card"></center>
+                          <center><img class="card-img-top" style="width:250px; height: 250px;" src="@item.Foto" alt="Imagem de capa do card"></center>
                               <div class="card-body">
                                 <h5 class="card-title"> @item.Titulo</h5>
                                 <p class="card-text">@item.Descricao</p>
-                                <a asp-action="EditarPortfolio" class="btn btn-dark nr-1" asp-route-id="@item.Id"> Alterar </a>
+
+                              
+                                
+                                <a href="EditarPortfolio?Id=@item.Id" class="btn btn-dark nr-1"> Alterar </a>
                                 <a asp-action="ExcluirPortfolio" class="btn btn-danger nr-1" asp-route-id="@item.Id"> Deletar </a>
+                                 
                               </div>
                     </div>
        
           </div>
+
         }
-            
+           
+          
     }
 </div>
