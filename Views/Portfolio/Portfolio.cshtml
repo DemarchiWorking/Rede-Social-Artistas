@@ -1,87 +1,35 @@
 ﻿@{
+    var data = ViewBag.Portfolio;  
+    var usuario = ViewBag.Usuario;  
 
 }
 
-   <div class="col-lg-2" style="text-align:right">
-            <a href="CadastrarPortfolio"><button type="button" class="btn btn-block btn-dark">
-                Cadastrar
-            </button></a>
-     </div>
 
-     @{
-         for
-     }
+    <div class="col-lg-2" style="text-align:right">
+                <a href="CadastrarPortfolio"><button type="button" class="btn btn-block btn-dark">
+                    Cadastrar
+                </button></a>
+    </div>
+   
+
 <div class="row">
-  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <div class="card" style="width: 18rem;">
-          <center><img class="card-img-top" style="width:250px; height: 250px;" src="https://img.elo7.com.br/product/original/3337D7B/camiseta-pintada-a-mao-camiseta.jpg" alt="Imagem de capa do card"></center>
-          <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-          <div class="card-body">
-            <a href="#" class="card-link">Link do card</a>
-            <a href="#" class="card-link">Outro link</a>
-          </div>
-        </div>
-    
 
-        <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
-      <div class="card-body">
-        <h5 class="card-title">Título do card</h5>
-        <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
-      <div class="card-body">
-        <a href="#" class="card-link">Link do card</a>
-        <a href="#" class="card-link">Outro link</a>
-      </div>
-    </div>
-      </div>
-  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
-          <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+    @{
+        foreach (var item in data)
+        {
+                  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                        <div class="card" style="width: 18rem;">
+                          <center><img class="card-img-top" style="width:250px; height: 250px;" src="https://img.elo7.com.br/product/original/3337D7B/camiseta-pintada-a-mao-camiseta.jpg" alt="Imagem de capa do card"></center>
+                              <div class="card-body">
+                                <h5 class="card-title"> @item.Titulo</h5>
+                                <p class="card-text">@item.Descricao</p>
+                                <a asp-action="EditarPortfolio" class="btn btn-dark nr-1" asp-route-id="@item.Id"> Alterar </a>
+                                <a asp-action="ExcluirPortfolio" class="btn btn-danger nr-1" asp-route-id="@item.Id"> Deletar </a>
+                              </div>
+                    </div>
+       
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-          <div class="card-body">
-            <a href="#" class="card-link">Link do card</a>
-            <a href="#" class="card-link">Outro link</a>
-          </div>
-        </div>
-    
-
-        <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
-      <div class="card-body">
-        <h5 class="card-title">Título do card</h5>
-        <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
-      <div class="card-body">
-        <a href="#" class="card-link">Link do card</a>
-        <a href="#" class="card-link">Outro link</a>
-      </div>
-    </div>
-      </div>
+        }
+            
+    }
 </div>

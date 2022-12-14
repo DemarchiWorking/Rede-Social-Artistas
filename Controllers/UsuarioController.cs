@@ -25,15 +25,15 @@ namespace ArtCulture.Controllers
         [HttpGet]
         public IActionResult Login(int? id)
         {
-            bool alerta =  false;
+            bool alerta = false;
             ViewBag.Alerta = alerta;
             if (id != null)
             {
-               
+
 
                 if (id == 0)
                 {
-                    
+
                     HttpContext.Session.SetString("usuarioLogado", string.Empty);
                     HttpContext.Session.SetString("usuarioId", string.Empty);
                 }
@@ -52,13 +52,13 @@ namespace ArtCulture.Controllers
         public IActionResult LoginValidar(Usuario usuario)
         {
             var resposta = _usuarioService.LoginValidar(usuario);
-            
-            if(resposta.Status == 0)
+
+            if (resposta.Status == 0)
             {
-               
+
             }
             else
-            {   
+            {
                 HttpContext.Session.SetString("usuarioLogado", JsonConvert.SerializeObject(resposta.Resultado));
                 return Redirect("/Home/Perfil");
             }
@@ -78,7 +78,7 @@ namespace ArtCulture.Controllers
 
 
             return Redirect("/");
-      
+
             //return View(resposta);
 
             /* 

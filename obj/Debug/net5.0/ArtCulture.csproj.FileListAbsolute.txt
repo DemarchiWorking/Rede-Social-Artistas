@@ -91,3 +91,4 @@ C:\Users\AntonioEduardoSilvei\source\repos\ArtCulture\ArtCulture\obj\Debug\net5.
 C:\Users\AntonioEduardoSilvei\source\repos\ArtCulture\ArtCulture\obj\Debug\net5.0\Razor\Views\Portfolio\Portfolio.cshtml.g.cs
 C:\Users\AntonioEduardoSilvei\source\repos\ArtCulture\ArtCulture\obj\Debug\net5.0\Razor\Views\Portfolio\Produto.cshtml.g.cs
 C:\Users\AntonioEduardoSilvei\source\repos\ArtCulture\ArtCulture\obj\Debug\net5.0\Razor\Views\Portfolio\Servico.cshtml.g.cs
+C:\Users\AntonioEduardoSilvei\source\repos\ArtCulture\ArtCulture\obj\Debug\net5.0\Razor\Views\Portfolio\EditarPortfolio.cshtml.g.cs

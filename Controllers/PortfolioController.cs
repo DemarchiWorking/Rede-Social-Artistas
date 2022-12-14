@@ -1,7 +1,9 @@
 ﻿using ArtCulture.Models;
 using ArtCulture.Service;
 using ArtCulture.Service.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace ArtCulture.Controllers
@@ -26,6 +28,8 @@ namespace ArtCulture.Controllers
         [HttpGet("Portfolio/Portfolio")]
         public IActionResult Portfolio()
         {
+           var listaPortifolio = ListaPortfolio();
+            ViewBag.Portfolio = listaPortifolio.Resultado;
             return View();
         }
 
@@ -34,6 +38,16 @@ namespace ArtCulture.Controllers
         {
             return View();
         }
+
+        [HttpGet("Portfolio/EditarPortfolio")]
+        public IActionResult EditarPortfolio(int Id)
+        {
+            var portfolioAntigo = _portfolioService.SelecionarPorId(Id);
+            ViewBag.PortfolioAntigo = portfolioAntigo;
+
+            return View();
+        }
+
         [HttpGet("Portfolio/Produto")]
         public IActionResult Produto()
         {
@@ -59,6 +73,9 @@ namespace ArtCulture.Controllers
         [HttpPost("Portfolio/Portfolio/CadastrarPortfolio")]
         public ActionResult CadastrarPortfolio(Portfolio portfolio)
         {
+            var usuarioLogado = JsonConvert.DeserializeObject<IEnumerable<Usuario>>(HttpContext.Session.GetString("usuarioLogado"));
+            ViewBag.UsuarioLogado = usuarioLogado;
+
             var resposta = _portfolioService.CadastrarPortfolio(portfolio);
             return Redirect("/Portfolio/Portfolio/Portfolio");
             //return View(portfolio);
@@ -79,10 +96,10 @@ namespace ArtCulture.Controllers
         }
 
         [HttpGet("Portfolio/Portfolio/Listar")]
-        public ActionResult ListaPortfolio(Portfolio portfolio)
+        public Resposta<Portfolio> ListaPortfolio()
         {
-            var resposta = _portfolioService.CadastrarPortfolio(portfolio);
-            return Redirect("/Portfolio/Portfolio/Portfolio");
+            var resposta = _portfolioService.ListarPortfolio();
+            return resposta;
         }
 
         [HttpGet("Portfolio/Produto/Listar")]
@@ -99,7 +116,21 @@ namespace ArtCulture.Controllers
             return View(servico);
         }
 
+        [HttpGet("Portfolio/Excluir")]
+        public ActionResult ExcluirPortfolio(int Id)
+        {
+            var resposta = _portfolioService.ExcluirPortfolio(Id);
+            return Redirect("/Portfolio/Portfolio/Portfolio");
+        }
 
+        [HttpGet("Portfolio/Editar")]
+        public ActionResult EditarPortfolio(Portfolio portfolio)
+        {
+
+            var resposta = _portfolioService.AlterarPortfolio(portfolio);
+            return Redirect("/Portfolio/Portfolio/Portfolio");
+        }
 
     }
 }
+        

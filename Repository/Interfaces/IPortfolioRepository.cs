@@ -9,5 +9,11 @@ namespace AniversarioReentregaPA.Repositorio
         Resposta<Produto> CadastrarProduto(Produto produto);
         Resposta<Servico> CadastrarServico(Servico servico);
 
+        Resposta<Portfolio> ListarPortifolio();
+        Resposta<Portfolio> SelecionarPorId(int Id);
+        Resposta<int> ExcluirPortfolio(int Id);
+
+        Resposta<int> AlterarPortfolio(Portfolio portfolio);
+
     }
 }

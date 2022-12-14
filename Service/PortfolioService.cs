@@ -54,11 +54,11 @@ namespace ArtCulture.Service
 
 
 
-        public Resposta<Portfolio> ListarPortfolio(Portfolio portfolio)
+        public Resposta<Portfolio> ListarPortfolio()
         {
             try
             {
-                return _portfolioRepository.CadastrarPortfolio(portfolio);
+                return _portfolioRepository.ListarPortifolio();
             }
             catch (Exception e)
             {
@@ -89,6 +89,44 @@ namespace ArtCulture.Service
                 return null;
             }
         }
+
+        public Resposta<int> ExcluirPortfolio(int Id)
+        {
+            try
+            {
+                return _portfolioRepository.ExcluirPortfolio(Id);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public Resposta<Portfolio> SelecionarPorId(int Id)
+        {
+            try
+            {
+                return _portfolioRepository.SelecionarPorId(Id);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+        }
+
+        public Resposta<int> AlterarPortfolio(Portfolio portfolio) 
+        {
+            try
+            {
+                return _portfolioRepository.AlterarPortfolio(portfolio);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
     }
 }
 

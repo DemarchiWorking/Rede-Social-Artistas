@@ -25,7 +25,7 @@ namespace AniversarioReentregaPA.Repositorio
             try
             {
                 DateTime data = DateTime.Now;
-                string sql = $@"INSERT INTO PORTIFOLIO (ID_USUARIO, TITULO, DESCRICAO, FOTO, CRIACAO) VALUES(1,'{portfolio.Id}','{portfolio.Descricao}', '{portfolio.Foto}', CAST('{data.ToString("yyyy-MM-dd")}' as datetime))"; 
+                string sql = $@"INSERT INTO PORTIFOLIO (ID_USUARIO, TITULO, DESCRICAO, FOTO, CRIACAO) VALUES(1,'{portfolio.Titulo}','{portfolio.Descricao}', '{portfolio.Foto}', CAST('{data.ToString("yyyy-MM-dd")}' as datetime))"; 
                 var resultado = _conexao.Execute(sql);
 
                 Resposta<Portfolio> resposta = new Resposta<Portfolio>();
@@ -110,46 +110,38 @@ namespace AniversarioReentregaPA.Repositorio
             try
             {
                 string sql = $@"                  
-                               SELECT * FROM 
+                               SELECT ID, ID_USUARIO,TITULO,DESCRICAO,FOTO,CRIACAO FROM PORTIFOLIO;";
 
 
 
-                var result = _connection.Query<dynamic>(sql);
+                var result = _conexao.Query<Portfolio>(sql);
 
                 if (result != null && result.ToList().Count > 0)
                 {
-                    List<CountTweetPerTagAndLang> list = new List<CountTweetPerTagAndLang>();
+                    List<Portfolio> list = new List<Portfolio>();
 
                     result.ToList<dynamic>().ForEach(it =>
                     {
-                        list.Add(new CountTweetPerTagAndLang
+                        list.Add(new Portfolio
                         {
-                            tag = Convert.ToString(it.TAG),
-                            lang = Convert.ToString(it.LANG),
-                            count = Convert.ToInt32(it.COUNT)
+                            Id = Convert.ToInt32(it.Id),
+                            Titulo = Convert.ToString(it.Titulo),
+                            Descricao = Convert.ToString(it.Descricao),
+                            Foto = Convert.ToString(it.Foto)
                         });
                     });
 
-                    return new Response()
+                    return new Resposta<Portfolio>()
                     {
-                        List = list,
-                        isSuccess = true
+                        Resultado = list,
+                        Status = 200
                     };
-                }
-                else if (result != null && result.ToList().Count == 0)
-                {
-                    return new Response()
-                    {
-                        isEmpty = true,
-                        isSuccess = true
-                    };
-
                 }
                 else
                 {
-                    return new Response()
+                    return new Resposta<Portfolio>()
                     {
-                        isSuccess = false
+                        Status = 0
                     };
                 }
             }
@@ -161,6 +153,107 @@ namespace AniversarioReentregaPA.Repositorio
             return null;
         }
 
+        public Resposta<int> ExcluirPortfolio(int Id)
+        {
+            try
+            {
+                string sql = $@"DELETE FROM PORTIFOLIO WHERE ID = {Id}";
+                var resultado = _conexao.Execute(sql);
 
+                Resposta<int> resposta = new Resposta<int>();
+
+                if (resultado != 0)
+                {
+                    resposta.Status = 200;
+                    resposta.Titulo = "Portfolio excluido com sucesso.";
+                    return resposta;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public Resposta<Portfolio> SelecionarPorId(int Id)
+        {
+            try
+            {
+                string sql = $@"SELECT ID, ID_USUARIO,TITULO,DESCRICAO,FOTO,CRIACAO FROM PORTIFOLIO WHERE ID = {Id};";
+
+
+
+                var result = _conexao.Query<Portfolio>(sql);
+
+                if (result != null && result.ToList().Count > 0)
+                {
+                    List<Portfolio> list = new List<Portfolio>();
+
+                    result.ToList<dynamic>().ForEach(it =>
+                    {
+                        list.Add(new Portfolio
+                        {
+                            Id = Convert.ToInt32(it.Id),
+                            Titulo = Convert.ToString(it.Titulo),
+                            Descricao = Convert.ToString(it.Descricao),
+                            Foto = Convert.ToString(it.Foto)
+                        });
+                    });
+
+                    return new Resposta<Portfolio>()
+                    {
+                        Resultado = list,
+                        Status = 200
+                    };
+                }
+                else
+                {
+                    return new Resposta<Portfolio>()
+                    {
+                        Status = 0
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return null;
+        }
+            
+
+
+        public Resposta<int> AlterarPortfolio(Portfolio portfolio)
+        {
+            try
+            {
+                string sql = $@"UPDATE PORTIFOLIO SET TITULO = '{portfolio.Titulo}', DESCRICAO = '{portfolio.Descricao}', FOTO = '{portfolio.Foto}' WHERE Id = {portfolio.Id};";
+                var resultado = _conexao.Execute(sql);
+
+                Resposta<int> resposta = new Resposta<int>();
+
+                if (resultado != 0)
+                {
+                    resposta.Status = 200;
+                    resposta.Titulo = "Portfolio alterado com sucesso.";
+                    return resposta;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
 }
